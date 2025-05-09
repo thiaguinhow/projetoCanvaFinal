@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site para teste de código</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+    
+        #topo {
+            background-color: #2d3e50;
+            margin: 0; /* Remove margens */
+            padding: 30px 20px;
+            width: 100%; /* Ocupa toda a largura */
+            color: #ffffff;
+            text-align: center;
+            border-radius: 0; /* Remove cantos arredondados */
+            box-shadow: none; /* Remove sombra que pode criar uma linha */
+            border-bottom: none; /* Remove borda inferior, caso esteja causando a linha */
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+
+    
+        #topo h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+
+
+    
+        #menu {
+            background-color: #3b4f63;
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 40%; /* Agora está mais estreito */
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+
+    
+        #menu a {
+            background-color: #4db6ac; /* Verde-azulado */
+            border-radius: 6px;
+            color: #fff;
+            padding: 12px 22px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+    
+        #menu a:hover {
+            background-color: #ffffff;
+            color: #4db6ac;
+            border: 1px solid #4db6ac;
+        }
+    
+        #conteudo {
+            background-color: #ffffff;
+            margin: 20px auto 40px auto;
+            padding: 30px;
+            max-width: 70%; /* Agora está mais estreito, ajustado para 70% */
+            border: 3px solid #4db6ac;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+    </style>
+    
+    
+
+        <script type="text/javascript" src="js/jquery.js">
+        </script>
+
+        <script>
+            function carregar(pagina) {
+                $("#conteudo").load(pagina)
+            }
+        </script>
+</head>
+<body>
+    <div id ="topo">
+        BEM VINDO AO MEU SITE
+    </div>
+    <div id ="menu">
+        <center>
+        <a href="javascript:carregar('home.html')">Home</a>
+        &nbsp;&nbsp;    
+        <a href="javascript:carregar('form1.html')">Form1</a>
+        &nbsp;&nbsp;
+        <a href="javascript:carregar('form2.html')">Form2</a>
+        &nbsp;&nbsp;
+        <a href="javascript:carregar('canvas1.html')">Canvas1</a>
+        &nbsp;&nbsp;
+        <a href="javascript:carregar('canvas2.html')">Canvas2</a>
+        
+        </center>
+    </div>
+    <div id="conteudo">
+        <script>
+            carregar('home.html');
+        </script>
+    </div>
+
+</body>
+</html>

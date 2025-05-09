@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function Jogar()
+        {
+            aposta = document.getElementById('aposta');
+            aposta = Number(aposta.value);
+            alert('Voce apostou em '+aposta);
+            sorteio = Math.floor(Math.random(0) * (4 -1)+ 1);
+
+            x=document.getElementById('x').getContext('2d');
+            x.clearRect(0, 0, 300, 300);
+            x.beginPath();
+
+            if(sorteio == 1)
+            {
+                x.fillStyle = "yellow";
+                x.strokeStyle = "pink";
+                x.arc(150, 150, 50, 0 , 2 * 3.14);
+                x.fill();
+                x.stroke();
+            }
+            else if(sorteio == 2)
+            {
+                x.fillStyle = "black";
+                x.fillRect(10, 10, 50, 50);
+            }
+            else
+            {
+                x.fillStyle = "black";
+                x.fillRect(10, 10, 150, 50);
+            }
+
+            setTimeout(() => {
+                if(aposta == sorteio)
+                    alert("Acertou... Parabéns");
+                else
+                alert("Errou... Tente novamente");
+            }, 500);
+        }
+    </script>
+</head>
+<body>
+    <center>
+
+        FAÇA SUA APOSTA <br><br>
+
+        <form>
+            <select name="aposta" id="aposta">
+                <option value="1">Circulo</option>
+                <option value="2">Quadrado</option>
+                <option value="3">Retangulo</option>
+            </select>
+        </form>
+        <br>
+
+        <button onclick="Jogar()">Jogar</button>
+
+        <canvas id="x" width="300" height="300" 
+        style="border: 3px solid black;">
+        </canvas>
+
+    </center>
+</body>
+</html>

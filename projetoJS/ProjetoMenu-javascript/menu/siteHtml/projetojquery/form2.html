@@ -1,0 +1,115 @@
+<html>
+<head>
+<title> Livro Desenvolvimento Web </title>
+<style>
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #002776; 
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    max-width: 500px;
+    margin: 60px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+fieldset {
+    border: 2px solid #002776;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+legend {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #006400; 
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+input[type="text"],
+select,
+input[type="color"],
+input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    margin-top: 20px;
+    background-color: #002776; 
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+    background-color: #0041c4;
+}
+</style>
+</head>
+<body>
+
+        <form action="processa.php" method="post">
+        <fieldset>
+        <legend>Brasileirão 2025</legend>
+        <br><br>
+
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required maxlength="50"
+    placeholder="Digite seu nome" required>
+        
+        <br><br>
+
+        <label for="idade">Idade:</label>
+        <input type="text" id="idade" name="idade" pattern="[1-9][0-9]*"
+    placeholder="Digite sua idade" required>
+
+        <br><br>
+
+        <label for="time">Time Favorito:</label>
+        <select id="time" name="time" required>
+            <option value="" disabled selected>Selecione...</option>
+            <option value="corinthians">Corinthians</option>
+            <option value="flamengo">Flamengo</option>
+            <option value="palmeiras">Palmeiras</option>
+            <option value="sp">São Paulo</option>
+            <option value="santos">Santos</option>
+            <option value="inter">Internacional</option>
+
+        </select>
+        <br><br>
+
+        <label for="cor">Qual a cor principal do time:</label>
+        <input type="color" id="cor" name="cor" value="black">
+<!-- 'value' define a cor padrão (vermelho no exemplo) -->
+        <br><br>
+
+        <label for="idade">0 a 100 quanto seu time tem chance de ser CAMPEÃO?</label>
+        <input type="range" id="idade" name="idade" min="0" max="100" step="1"
+value="0">
+        <br><br>
+
+    <input type="submit" value="ENVIAR">
+    
+    </fieldset>
+
+    </form>
+</body>
+</html>
