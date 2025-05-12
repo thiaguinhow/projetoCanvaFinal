@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Jogo do Dino</title>
     <style>
+        /* Estilo geral da página */
         body {
             font-family: sans-serif;
             background-color: #f4f4f4;
             text-align: center;
         }
 
+        /* Área principal do jogo */
         #game {
             position: relative;
             width: 800px;
@@ -20,6 +22,7 @@
             overflow: hidden;
         }
 
+        /* Estilo do personagem Dino */
         #dino {
             position: absolute;
             bottom: 0;
@@ -29,6 +32,7 @@
             background-color: green;
         }
 
+        /* Estilo do obstáculo Cacto */
         #cactus {
             position: absolute;
             bottom: 0;
@@ -39,21 +43,25 @@
             animation: moveCactus 2s linear infinite;
         }
 
+        /* Animação para o cacto se mover da direita para a esquerda */
         @keyframes moveCactus {
             0% { right: -30px; }
             100% { right: 100%; }
         }
 
+        /* Classe de animação de pulo */
         .jump {
             animation: jump 0.6s ease-out;
         }
 
+        /* Animação de pulo */
         @keyframes jump {
             0% { bottom: 0; }
             50% { bottom: 100px; }
             100% { bottom: 0; }
         }
 
+        /* Texto de fim de jogo */
         #game-over {
             display: none;
             font-size: 24px;
@@ -62,6 +70,7 @@
             margin-top: 10px;
         }
 
+        /* Botão de reinício */
         #restart-btn {
             display: none;
             margin-top: 10px;
@@ -70,6 +79,7 @@
             cursor: pointer;
         }
 
+        /* Exibição de pontos */
         #score {
             font-size: 20px;
             font-weight: bold;
@@ -79,71 +89,82 @@
 </head>
 <body>
 
-<h1>Jogo do Dino Simples</h1>
-<div id="score">Pontos: 0</div>
-<div id="game">
-    <div id="dino"></div>
-    <div id="cactus"></div>
-    <div id="game-over">Game Over</div>
-</div>
-<button id="restart-btn">Reiniciar</button>
+    <h1>Jogo do Dino Simples</h1>
+    <div id="score">Pontos: 0</div>
 
-<script>
-    const dino = document.getElementById("dino");
-    const cactus = document.getElementById("cactus");
-    const gameOver = document.getElementById("game-over");
-    const restartBtn = document.getElementById("restart-btn");
-    const scoreDisplay = document.getElementById("score");
+    <div id="game">
+        <div id="dino"></div>
+        <div id="cactus"></div>
+        <div id="game-over">Game Over</div>
+    </div>
 
-    let isJumping = false;
-    let score = 0;
-    let gameInterval;
-    let scoreInterval;
+    <button id="restart-btn">Reiniciar</button>
 
-    document.addEventListener("keydown", function(event) {
-        if (event.code === "Space" || event.code === "ArrowUp") {
-            jump();
+    <script>
+        // Seleção dos elementos HTML
+        const dino = document.getElementById("dino");
+        const cactus = document.getElementById("cactus");
+        const gameOver = document.getElementById("game-over");
+        const restartBtn = document.getElementById("restart-btn");
+        const scoreDisplay = document.getElementById("score");
+
+        // Variáveis de controle
+        let isJumping = false;
+        let score = 0;
+        let gameInterval;
+        let scoreInterval;
+
+        // Evento para detectar pulo
+        document.addEventListener("keydown", function(event) {
+            if (event.code === "Space" || event.code === "ArrowUp") {
+                jump();
+            }
+        });
+
+        // Função para pular
+        function jump() {
+            if (isJumping) return;
+
+            isJumping = true;
+            dino.classList.add("jump");
+
+            setTimeout(() => {
+                dino.classList.remove("jump");
+                isJumping = false;
+            }, 500);
         }
-    });
 
-    function jump() {
-        if (isJumping) return;
+        // Verificação de colisão
+        function checkCollision() {
+            const dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("bottom"));
+            const cactusRight = parseInt(window.getComputedStyle(cactus).getPropertyValue("right"));
 
-        isJumping = true;
-        dino.classList.add("jump");
-
-        setTimeout(() => {
-            dino.classList.remove("jump");
-            isJumping = false;
-        }, 500);
-    }
-
-    function checkCollision() {
-        const dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("bottom"));
-        const cactusRight = parseInt(window.getComputedStyle(cactus).getPropertyValue("right"));
-
-        if (cactusRight > 720 && cactusRight < 770 && dinoTop < 40) {
-            gameOver.style.display = "block";
-            restartBtn.style.display = "inline-block";
-            cactus.style.animation = "none";
-            cactus.style.right = cactusRight + "px";
-            clearInterval(gameInterval);
-            clearInterval(scoreInterval);
+            if (cactusRight > 720 && cactusRight < 770 && dinoTop < 40) {
+                // Colisão detectada
+                gameOver.style.display = "block";
+                restartBtn.style.display = "inline-block";
+                cactus.style.animation = "none";
+                cactus.style.right = cactusRight + "px"; // Congela o cacto na posição atual
+                clearInterval(gameInterval);
+                clearInterval(scoreInterval);
+            }
         }
-    }
 
-    function updateScore() {
-        score++;
-        scoreDisplay.textContent = "Pontos: " + score;
-    }
+        // Atualização da pontuação
+        function updateScore() {
+            score++;
+            scoreDisplay.textContent = "Pontos: " + score;
+        }
 
-    gameInterval = setInterval(checkCollision, 10);
-    scoreInterval = setInterval(updateScore, 200); // Aumenta os pontos a cada 200ms
+        // Início do jogo
+        gameInterval = setInterval(checkCollision, 10); // Verifica colisão a cada 10ms
+        scoreInterval = setInterval(updateScore, 200);  // Pontuação aumenta a cada 200ms
 
-    restartBtn.addEventListener("click", function() {
-        location.reload();
-    });
-</script>
+        // Botão para reiniciar o jogo
+        restartBtn.addEventListener("click", function() {
+            location.reload();
+        });
+    </script>
 
 </body>
 </html>
